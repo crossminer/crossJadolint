@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gr.aueb.balab.jadolint.model;
-
-import java.util.List;
+package gr.aueb.balab.jadolint.rules;
 
 /**
  *
  * @author blue
  */
-public class RunBlocks {
-    
-    private String executable;
-    List<String> params;
+public class RunRules implements Rule {
     
 }

@@ -11,8 +11,9 @@ import java.util.List;
  *
  * @author blue
  */
-public class Run implements Instruction{
+public class RunBlock {
     
-    List<RunBlock> runs;
+    private String executable;
+    List<String> params;
     
 }
