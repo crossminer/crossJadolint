@@ -5,6 +5,8 @@
  */
 package gr.aueb.balab.jadolint;
 
+import gr.aueb.balab.jadolint.model.Dockerfile;
+import gr.aueb.balab.jadolint.model.Line;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,17 +21,23 @@ import java.util.logging.Logger;
  */
 public class LineMerger {
     
-    public String mergeLines(File dockerFile) throws IOException {
+    public void mergeLines(Dockerfile doc, File dockerFile) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(dockerFile)));
         String line = null;
         String newLine = "";
+        int lineCounter = 0;
+        int lineNumber = -1;
+        
         boolean hasHealthcheck = false;
         boolean isContinued = false;
+        
         while ((line = reader.readLine()) != null) {
+            lineCounter++;
             if (hasInstruction(line) && line.endsWith(" \\")) {
                 //newLine = "";
                 newLine += line;
                 isContinued = true;
+                lineNumber = lineCounter;
             } else if (line.endsWith(" \\") && isContinued) {
                 newLine = newLine + " " + line;
             } else if (newLine != null && newLine.contains("HEALTHCHECK") && !hasHealthcheck) {
@@ -39,16 +47,19 @@ public class LineMerger {
                 newLine = newLine + " " + line;
                 newLine = newLine.replace(" \\", "");
                 newLine = newLine.trim().replaceAll(" +", " ");
-                newLine += "\n";
+                //newLine += "\n";
+                doc.addLine(new Line(newLine, lineNumber));
+                newLine = "";
                 isContinued = false;
             } else if (hasInstruction(line) && !line.endsWith(" \\")) {
                 newLine += line.trim().replaceAll(" +", " ");
-                newLine += "\n";
+                //newLine += "\n";
+                lineNumber = lineCounter;
+                doc.addLine(new Line(newLine, lineNumber));
+                newLine = "";
             }
         }
         reader.close();
-
-        return newLine;
     }
     
     private boolean hasInstruction(String line){
@@ -66,8 +77,13 @@ public class LineMerger {
         
         try {
             LineMerger l = new LineMerger();
+            Dockerfile doc = new Dockerfile();
             
-            System.out.println(l.mergeLines(new File("/Users/blue/repos/scava-deployment/metric-platform/Dockerfile")));
+            l.mergeLines(doc, new File("/Users/blue/repos/scava-deployment/metric-platform/Dockerfile"));
+            
+            for(Line line : doc.getLines()){
+                System.out.println(line.getLine());
+            }
         } catch (IOException ex) {
             Logger.getLogger(LineMerger.class.getName()).log(Level.SEVERE, null, ex);
         }

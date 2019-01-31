@@ -5,6 +5,7 @@
  */
 package gr.aueb.balab.jadolint.model;
 
+import gr.aueb.balab.jadolnt.util.JadolintUtils;
 import java.util.List;
 
 /**
@@ -14,6 +15,30 @@ import java.util.List;
 public class Line {
     
     private int lineNumber;
-    private List<? extends Instruction> instructions;
+    private String line;
+    private String instruction;
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
+    }
+    
+    public Line(String line, int lineNumber){
+        this.line = line;
+        this.lineNumber = lineNumber;
+        
+        instruction = JadolintUtils.getInstruction(line);
+    }
     
 }
