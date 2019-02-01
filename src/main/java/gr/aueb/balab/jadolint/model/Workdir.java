@@ -14,7 +14,15 @@ public class Workdir implements Instruction {
     private String path;
     
     public Workdir(String line){
-        path = line.split(" ")[1];
+        path = line.split(" ", 2)[1];
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
     
 }

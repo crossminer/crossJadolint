@@ -5,20 +5,21 @@
  */
 package gr.aueb.balab.jadolint.rules;
 
+import gr.aueb.balab.jadolint.model.Expose;
+
 /**
  *
  * @author blue
  */
-public class WorkdirRules {
+public class ExposeRules {
     
-    public boolean checkDL3000(String line){
-        if(!line.startsWith("/")){
-            if(line.startsWith("{"))
-                return true;
-            else
-                return false;
-        } else
+    public boolean checkDL3011(String line){
+        Expose expose = new Expose(line);
+        
+        if(expose.getPort() >= 0 && expose.getPort() <= 65535)
             return true;
+        else
+            return false;
     }
     
 }
