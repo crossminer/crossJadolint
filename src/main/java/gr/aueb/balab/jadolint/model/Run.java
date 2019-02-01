@@ -5,6 +5,7 @@
  */
 package gr.aueb.balab.jadolint.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,25 @@ import java.util.List;
  */
 public class Run implements Instruction{
     
-    List<RunBlock> runs;
+    List<RunBlock> runBlocks = new ArrayList<>();
+    
+    public Run(String line){
+        String lineWithoutInstruction = line.split(" ", 2)[1];
+        
+        String regex = "\\s*&&\\s*";
+        
+        String[] splitLine = lineWithoutInstruction.split(regex);
+        
+        for(String s : splitLine)
+            runBlocks.add(new RunBlock(s));
+    }
+
+    public List<RunBlock> getRunBlocks() {
+        return runBlocks;
+    }
+
+    public void setRunBlocks(List<RunBlock> runs) {
+        this.runBlocks = runs;
+    }
     
 }

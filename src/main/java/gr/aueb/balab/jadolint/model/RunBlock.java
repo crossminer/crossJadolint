@@ -14,6 +14,31 @@ import java.util.List;
 public class RunBlock {
     
     private String executable;
-    List<String> params;
+    String params;
+    
+    public RunBlock(String line){
+        
+        String[] splitLine = line.split(" ", 2);
+        
+        executable = splitLine[0].trim();
+        params = splitLine[1].trim();
+        
+    }
+
+    public String getExecutable() {
+        return executable;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setExecutable(String executable) {
+        this.executable = executable;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
+    }
     
 }

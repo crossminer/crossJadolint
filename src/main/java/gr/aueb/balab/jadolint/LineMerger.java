@@ -7,6 +7,8 @@ package gr.aueb.balab.jadolint;
 
 import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.Line;
+import gr.aueb.balab.jadolint.model.Run;
+import gr.aueb.balab.jadolint.rules.RunRules;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,8 +84,14 @@ public class LineMerger {
             l.mergeLines(doc, new File("/Users/blue/repos/scava-deployment/metric-platform/Dockerfile"));
             
             for(Line line : doc.getLines()){
-                System.out.println(line.getLine());
+                //System.out.println(line.getLine() + " " + line.getLineNumber() + " " + line.getInstruction());
+                if(line.getInstruction().equals("RUN")){
+                    RunRules r = new RunRules(new Run(line.getLine()));
+                    System.out.println(r.checkDL3003() + " " + line.getLineNumber());
+                }
             }
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(LineMerger.class.getName()).log(Level.SEVERE, null, ex);
         }

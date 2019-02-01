@@ -26,12 +26,20 @@ public class Line {
         return line;
     }
 
+    public String getInstruction() {
+        return instruction;
+    }
+
     public void setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
     }
 
     public void setLine(String line) {
         this.line = line;
+    }
+
+    public void setInstruction(String instruction) {
+        this.instruction = instruction;
     }
     
     public Line(String line, int lineNumber){
