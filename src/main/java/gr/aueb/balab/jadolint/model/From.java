@@ -26,6 +26,7 @@ public class From {
         Matcher matcher = pattern.matcher(splitLine);
         
         if(matcher.find()){
+            //TODO the AS case
             ;
         } else if(splitLine.contains(":")){
             String[] parts = splitLine.split(":");
