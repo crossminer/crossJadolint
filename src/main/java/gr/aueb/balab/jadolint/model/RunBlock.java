@@ -14,7 +14,7 @@ import java.util.List;
 public class RunBlock {
     
     private String executable;
-    String params;
+    private String params;
     
     public RunBlock(String line){
         

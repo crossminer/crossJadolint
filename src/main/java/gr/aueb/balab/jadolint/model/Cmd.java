@@ -14,11 +14,12 @@ import java.util.regex.Pattern;
  *
  * @author blue
  */
-public class Run implements Instruction{
+public class Cmd implements Instruction{
     
-    List<RunBlock> runBlocks = new ArrayList<>();
+    private String executable;
+    private String params;
     
-    public Run(String line){
+    public Cmd(String line){
         String lineWithoutInstruction = line.split(" ", 2)[1];
         
         String regex = "\\[.*?\\]";
@@ -43,7 +44,10 @@ public class Run implements Instruction{
                 blockBody = blockBody + " " + s.substring(1, s.length() - 1);
             }
             
-            runBlocks.add(new RunBlock(blockBody.trim()));
+            String[] splitLine = blockBody.trim().split(" ", 2);
+        
+            executable = splitLine[0].trim();
+            params = splitLine[1].trim();
             
         } else {
         
@@ -51,18 +55,10 @@ public class Run implements Instruction{
 
             String[] splitLine = lineWithoutInstruction.split(regex);
 
-            for(String s : splitLine)
-                runBlocks.add(new RunBlock(s));
+            executable = splitLine[0].trim();
+            params = splitLine[1].trim();
         
         }
-    }
-
-    public List<RunBlock> getRunBlocks() {
-        return runBlocks;
-    }
-
-    public void setRunBlocks(List<RunBlock> runs) {
-        this.runBlocks = runs;
     }
     
 }
