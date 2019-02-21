@@ -11,8 +11,10 @@ public class Add {
 
         if (splitLine.startsWith("--chown")) {
             String[] parts = splitLine.split(" ");
-            setUser(parts[0]);
-            setGroup(parts[0]);
+            user = parts[0].substring(parts[0].indexOf("=") + 1,
+                            parts[0].indexOf(":"));
+
+            group = parts[0].substring(parts[0].indexOf(":") + 1);
             src = parts[1];
             dest = parts[2];
         } else
@@ -21,14 +23,6 @@ public class Add {
                 src = parts[0];
                 dest = parts[1];
             }
-    }
-
-    private void setUser(String s) {
-        user = s.substring(s.indexOf("=") + 1, s.indexOf(":"));
-    }
-
-    private void setGroup(String s) {
-        group = s.substring(s.indexOf(":"));
     }
 
     public String getSrc() {
@@ -51,8 +45,16 @@ public class Add {
         return user;
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     public String getGroup() {
         return group;
+    }
+
+    public void setGroup(String group) {
+        group = this.group;
     }
 
 }
