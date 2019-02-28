@@ -8,13 +8,16 @@ public class Add {
 
     public Add(String line) {
         String splitLine = line.split(" ", 2)[1]; //ADD command discarded
-
         if (splitLine.startsWith("--chown")) {
             String[] parts = splitLine.split(" ");
-            user = parts[0].substring(parts[0].indexOf("=") + 1,
-                            parts[0].indexOf(":"));
-
-            group = parts[0].substring(parts[0].indexOf(":") + 1);
+            if (parts[0].contains(":")) {
+                user = parts[0].substring(parts[0].indexOf("=") + 1,
+                                parts[0].indexOf(":"));
+                group = parts[0].substring(parts[0].indexOf(":") + 1);
+            } else {
+                user = parts[0].substring(parts[0].indexOf("=") + 1,
+                                parts[0].length());
+            }
             src = parts[1];
             dest = parts[2];
         } else
