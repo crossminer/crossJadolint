@@ -57,7 +57,7 @@ public class Add {
     }
 
     public void setGroup(String group) {
-        group = this.group;
+        this.group = group;
     }
 
 }
