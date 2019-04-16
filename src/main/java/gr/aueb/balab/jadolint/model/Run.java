@@ -16,7 +16,9 @@ import java.util.regex.Pattern;
  */
 public class Run implements Instruction{
     
-    List<RunBlock> runBlocks = new ArrayList<>();
+    private boolean execForm;
+    
+    private List<RunBlock> runBlocks = new ArrayList<>();
     
     public Run(String line){
         String lineWithoutInstruction = line.split(" ", 2)[1];
@@ -61,8 +63,16 @@ public class Run implements Instruction{
         return runBlocks;
     }
 
+    public boolean isExecForm() {
+        return execForm;
+    }
+
     public void setRunBlocks(List<RunBlock> runs) {
         this.runBlocks = runs;
+    }
+
+    public void setExecForm(boolean execForm) {
+        this.execForm = execForm;
     }
     
 }

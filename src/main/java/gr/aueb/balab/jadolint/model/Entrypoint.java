@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
  */
 public class Entrypoint {
     
+    private boolean execForm;
+    
     private String executable;
     private List<String> params = new ArrayList<>();
     
@@ -60,6 +62,10 @@ public class Entrypoint {
     public List<String> getParams() {
         return params;
     }
+    
+    public boolean isExecForm() {
+        return execForm;
+    }
 
     public void setExecutable(String executable) {
         this.executable = executable;
@@ -67,5 +73,9 @@ public class Entrypoint {
 
     public void setParams(List<String> params) {
         this.params = params;
+    }
+    
+    public void setExecForm(boolean execForm) {
+        this.execForm = execForm;
     }
 }

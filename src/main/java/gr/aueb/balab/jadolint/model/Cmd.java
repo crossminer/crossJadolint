@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
  */
 public class Cmd implements Instruction{
     
+    private boolean execForm;
+    
     private String executable;
     private String params;
     
@@ -59,6 +61,14 @@ public class Cmd implements Instruction{
             params = splitLine[1].trim();
         
         }
+    }
+    
+    public boolean isExecForm() {
+        return execForm;
+    }
+    
+    public void setExecForm(boolean execForm) {
+        this.execForm = execForm;
     }
     
 }
