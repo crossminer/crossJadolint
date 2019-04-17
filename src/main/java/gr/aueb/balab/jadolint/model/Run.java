@@ -6,6 +6,7 @@
 package gr.aueb.balab.jadolint.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,6 +74,29 @@ public class Run implements Instruction{
 
     public void setExecForm(boolean execForm) {
         this.execForm = execForm;
+    }
+    
+    public List<RunBlock> getAptGetInstallBlocks(){
+        List<RunBlock> runBlocksInstall = new ArrayList<>();
+        
+        for(RunBlock b : runBlocks){
+            String exec = b.getExecutable();
+            if(exec.equals("apt-get")){
+                String params = b.getParams();
+                
+                String[] paramsArray = params.split(" ");
+                
+                boolean containsInstall = Arrays.stream(paramsArray).anyMatch("install"::equals);
+                
+                if(containsInstall == true){
+                    //if(paramsArray[paramsArray.length - 1].contains("="))
+                        runBlocksInstall.add(b);
+                }
+            }
+            
+        }
+        
+        return runBlocksInstall;
     }
     
 }
