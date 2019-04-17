@@ -79,21 +79,19 @@ public class Run implements Instruction{
     public List<RunBlock> getAptGetInstallBlocks(){
         List<RunBlock> runBlocksInstall = new ArrayList<>();
         
-        for(RunBlock b : runBlocks){
-            String exec = b.getExecutable();
+        for(RunBlock rb : runBlocks){
+            String exec = rb.getExecutable();
             if(exec.equals("apt-get")){
-                String params = b.getParams();
+                String params = rb.getParams();
                 
                 String[] paramsArray = params.split(" ");
                 
                 boolean containsInstall = Arrays.stream(paramsArray).anyMatch("install"::equals);
                 
                 if(containsInstall == true){
-                    //if(paramsArray[paramsArray.length - 1].contains("="))
-                        runBlocksInstall.add(b);
+                        runBlocksInstall.add(rb);
                 }
             }
-            
         }
         
         return runBlocksInstall;

@@ -31,6 +31,21 @@ public class RunRules implements Rule {
         return true;
     }
     
+    public boolean checkDL3008(){
+        List<RunBlock> runBlocks = run.getAptGetInstallBlocks();
+        
+        for(RunBlock b : runBlocks){
+            String params = b.getParams();
+
+            String[] paramsArray = params.split(" ");
+
+                if(!paramsArray[paramsArray.length - 1].contains("="))
+                    return false;
+        }
+        
+        return true;
+    }
+    
     public RunRules(Run run){
         this.run = run;
     }
