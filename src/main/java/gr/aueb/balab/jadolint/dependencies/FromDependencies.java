@@ -10,6 +10,8 @@ public class FromDependencies {
         if (lineWithoutInstruction.contains(":")) {
             packageName = lineWithoutInstruction.split(":", 2)[0];
             packageVersion = lineWithoutInstruction.split(":", 2)[1];
+        } else {
+            packageName = lineWithoutInstruction;
         }
     }
 
