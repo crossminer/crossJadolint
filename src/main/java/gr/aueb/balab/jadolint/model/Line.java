@@ -5,8 +5,9 @@
  */
 package gr.aueb.balab.jadolint.model;
 
-import gr.aueb.balab.jadolnt.util.JadolintUtils;
 import java.util.List;
+
+import gr.aueb.balab.jadolint.util.JadolintUtils;
 
 /**
  *
