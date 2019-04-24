@@ -51,15 +51,16 @@ public class Cmd implements Instruction{
             executable = splitLine[0].trim();
             params = splitLine[1].trim();
             
+            execForm = true;
+            
         } else {
-        
-            regex = "\\s*&&\\s*";
 
-            String[] splitLine = lineWithoutInstruction.split(regex);
+            String[] splitLine = lineWithoutInstruction.split(" ");
 
             executable = splitLine[0].trim();
             params = splitLine[1].trim();
-        
+            
+            execForm = false;
         }
     }
     
