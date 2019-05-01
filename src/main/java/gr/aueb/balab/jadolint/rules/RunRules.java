@@ -39,8 +39,66 @@ public class RunRules implements Rule {
 
             String[] paramsArray = params.split(" ");
 
+            if(!paramsArray[paramsArray.length - 1].contains("="))
+                return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean checkDL3013(){
+        List<RunBlock> runBlocks = run.getPipInstallBlocks();
+        
+        for(RunBlock b : runBlocks){
+            String params = b.getParams();
+
+            String[] paramsArray = params.split(" ");
+
+            if(!paramsArray[paramsArray.length - 1].contains("=="))
+                return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean checkDL3017(){
+        List<RunBlock> runBlocks = run.getApkUpgradeBlocks();
+        
+        if(!runBlocks.isEmpty())
+            return false;
+        
+        return true;
+    }
+    
+    public boolean checkDL3018(){
+        List<RunBlock> runBlocks = run.getApkAddBlocks();
+        
+        for(RunBlock b : runBlocks){
+            String params = b.getParams();
+
+            String[] paramsArray = params.split(" ");
+
                 if(!paramsArray[paramsArray.length - 1].contains("="))
                     return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean checkDL3019(){
+        List<RunBlock> runBlocks = run.getApkAddBlocks();
+        
+        for(RunBlock b : runBlocks){
+            String params = b.getParams();
+
+            String[] paramsArray = params.split(" ");
+            
+            for(String s : paramsArray){
+                if(s.equals("--no-cache"))
+                    return true;
+            }
+            
+            return false;
         }
         
         return true;

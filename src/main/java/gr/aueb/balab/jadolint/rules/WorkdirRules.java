@@ -5,14 +5,18 @@
  */
 package gr.aueb.balab.jadolint.rules;
 
+import gr.aueb.balab.jadolint.model.Workdir;
+
 /**
  *
  * @author blue
  */
-public class WorkdirRules {
+public class WorkdirRules implements Rule {
     
     public boolean checkDL3000(String line){
-        if(!line.startsWith("/")){
+        Workdir workdir = new Workdir(line);
+        
+        if(!workdir.getPath().startsWith("/")){
             if(line.startsWith("{"))
                 return true;
             else

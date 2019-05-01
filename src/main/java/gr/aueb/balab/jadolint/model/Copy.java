@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Add {
+public class Copy {
     private List<String> src = new ArrayList<>();
     private String dest;
     private String user;
     private String group;
 
-    public Add(String line) {
-        String splitLine = line.split(" ", 2)[1]; //ADD command discarded
+    public Copy(String line) {
+        String splitLine = line.split(" ", 2)[1]; //COPY command discarded
         
         if(splitLine.contains("[\"")){
             

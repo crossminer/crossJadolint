@@ -97,4 +97,67 @@ public class Run implements Instruction{
         return runBlocksInstall;
     }
     
+    public List<RunBlock> getPipInstallBlocks(){
+        List<RunBlock> runBlocksInstall = new ArrayList<>();
+        
+        for(RunBlock rb : runBlocks){
+            String exec = rb.getExecutable();
+            if(exec.equals("pip")){
+                String params = rb.getParams();
+                
+                String[] paramsArray = params.split(" ");
+                
+                boolean containsInstall = Arrays.stream(paramsArray).anyMatch("install"::equals);
+                
+                if(containsInstall == true){
+                        runBlocksInstall.add(rb);
+                }
+            }
+        }
+        
+        return runBlocksInstall;
+    }
+    
+    public List<RunBlock> getApkUpgradeBlocks(){
+        List<RunBlock> runBlocksInstall = new ArrayList<>();
+        
+        for(RunBlock rb : runBlocks){
+            String exec = rb.getExecutable();
+            if(exec.equals("apk")){
+                String params = rb.getParams();
+                
+                String[] paramsArray = params.split(" ");
+                
+                boolean containsInstall = Arrays.stream(paramsArray).anyMatch("upgrade"::equals);
+                
+                if(containsInstall == true){
+                        runBlocksInstall.add(rb);
+                }
+            }
+        }
+        
+        return runBlocksInstall;
+    }
+    
+    public List<RunBlock> getApkAddBlocks(){
+        List<RunBlock> runBlocksInstall = new ArrayList<>();
+        
+        for(RunBlock rb : runBlocks){
+            String exec = rb.getExecutable();
+            if(exec.equals("apk")){
+                String params = rb.getParams();
+                
+                String[] paramsArray = params.split(" ");
+                
+                boolean containsInstall = Arrays.stream(paramsArray).anyMatch("add"::equals);
+                
+                if(containsInstall == true){
+                        runBlocksInstall.add(rb);
+                }
+            }
+        }
+        
+        return runBlocksInstall;
+    }
+    
 }

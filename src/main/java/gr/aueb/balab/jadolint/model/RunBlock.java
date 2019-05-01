@@ -18,10 +18,14 @@ public class RunBlock {
     
     public RunBlock(String line){
         
-        String[] splitLine = line.split(" ", 2);
-        
-        executable = splitLine[0].trim();
-        params = splitLine[1].trim();
+        if(line.trim().contains(" ")){
+            String[] splitLine = line.split(" ", 2);
+
+            executable = splitLine[0].trim();
+            params = splitLine[1].trim();
+        } else {
+            executable = line;
+        }
         
     }
 
