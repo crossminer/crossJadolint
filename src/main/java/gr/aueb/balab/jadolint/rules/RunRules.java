@@ -62,10 +62,25 @@ public class RunRules implements Rule {
     }
     
     public boolean checkDL3017(){
-        List<RunBlock> runBlocks = run.getPipInstallBlocks();
+        List<RunBlock> runBlocks = run.getApkUpgradeBlocks();
         
         if(!runBlocks.isEmpty())
             return false;
+        
+        return true;
+    }
+    
+    public boolean checkDL3018(){
+        List<RunBlock> runBlocks = run.getApkAddBlocks();
+        
+        for(RunBlock b : runBlocks){
+            String params = b.getParams();
+
+            String[] paramsArray = params.split(" ");
+
+                if(!paramsArray[paramsArray.length - 1].contains("="))
+                    return false;
+        }
         
         return true;
     }
