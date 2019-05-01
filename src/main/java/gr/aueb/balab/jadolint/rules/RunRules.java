@@ -39,8 +39,8 @@ public class RunRules implements Rule {
 
             String[] paramsArray = params.split(" ");
 
-                if(!paramsArray[paramsArray.length - 1].contains("="))
-                    return false;
+            if(!paramsArray[paramsArray.length - 1].contains("="))
+                return false;
         }
         
         return true;
@@ -54,8 +54,8 @@ public class RunRules implements Rule {
 
             String[] paramsArray = params.split(" ");
 
-                if(!paramsArray[paramsArray.length - 1].contains("=="))
-                    return false;
+            if(!paramsArray[paramsArray.length - 1].contains("=="))
+                return false;
         }
         
         return true;
@@ -80,6 +80,25 @@ public class RunRules implements Rule {
 
                 if(!paramsArray[paramsArray.length - 1].contains("="))
                     return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean checkDL3019(){
+        List<RunBlock> runBlocks = run.getApkAddBlocks();
+        
+        for(RunBlock b : runBlocks){
+            String params = b.getParams();
+
+            String[] paramsArray = params.split(" ");
+            
+            for(String s : paramsArray){
+                if(s.equals("--no-cache"))
+                    return true;
+            }
+            
+            return false;
         }
         
         return true;
