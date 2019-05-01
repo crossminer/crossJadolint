@@ -21,8 +21,7 @@ public class CopyRules implements Rule {
         List<String> src = copy.getSrc();
         
         for(String s : src){
-            if(s.endsWith(".tar") || s.endsWith(".bz2") || s.endsWith(".gz") || s.endsWith(".xz") || s.endsWith(".7z") || s.endsWith(".lzx") || s.endsWith(".s7z") || s.endsWith(".rar") || s.endsWith(".lzma") ||
-                    s.endsWith(".tlz") || s.endsWith(".txz") || s.endsWith(".zip"))
+            if(s.contains(".tar"))
                 return false;
         }
         
