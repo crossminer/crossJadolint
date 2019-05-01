@@ -11,7 +11,7 @@ import gr.aueb.balab.jadolint.model.Expose;
  *
  * @author blue
  */
-public class ExposeRules {
+public class ExposeRules implements Rule {
     
     public boolean checkDL3011(String line){
         Expose expose = new Expose(line);
