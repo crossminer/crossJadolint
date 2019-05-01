@@ -61,6 +61,15 @@ public class RunRules implements Rule {
         return true;
     }
     
+    public boolean checkDL3017(){
+        List<RunBlock> runBlocks = run.getPipInstallBlocks();
+        
+        if(!runBlocks.isEmpty())
+            return false;
+        
+        return true;
+    }
+    
     public RunRules(Run run){
         this.run = run;
     }
