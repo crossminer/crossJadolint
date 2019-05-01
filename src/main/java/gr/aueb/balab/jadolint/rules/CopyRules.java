@@ -28,6 +28,19 @@ public class CopyRules implements Rule {
         return true;
     }
     
+    public boolean checkDL3021(){
+        //String findCd = "(\\s|^)cd\\s";
+        
+        List<String> src = copy.getSrc();
+        
+        if(src.size() >= 2){
+            if(!copy.getDest().endsWith("/"))
+                return false;
+        }
+        
+        return true;
+    }
+    
     public CopyRules(Copy copy){
         this.copy = copy;
     }
