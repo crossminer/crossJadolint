@@ -1,18 +1,13 @@
 package gr.aueb.balab.jadolint.dependencies;
 
-public class FromDependencies {
+public class Dependency {
+
     private String packageName;
     private String packageVersion;
 
-    public FromDependencies(String line) {
-        String lineWithoutInstruction = line.split(" ", 2)[1];
-
-        if (lineWithoutInstruction.contains(":")) {
-            packageName = lineWithoutInstruction.split(":", 2)[0];
-            packageVersion = lineWithoutInstruction.split(":", 2)[1];
-        } else {
-            packageName = lineWithoutInstruction;
-        }
+    public Dependency(String packageName, String packageVersion) {
+        this.packageName = packageName;
+        this.packageVersion = packageVersion;
     }
 
     public String getPackageName() {
@@ -30,5 +25,4 @@ public class FromDependencies {
     public void setPackageVersion(String packageVersion) {
         this.packageVersion = packageVersion;
     }
-
 }
