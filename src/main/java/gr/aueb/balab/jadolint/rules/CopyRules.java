@@ -6,6 +6,9 @@
 package gr.aueb.balab.jadolint.rules;
 
 import gr.aueb.balab.jadolint.model.Copy;
+import gr.aueb.balab.jadolint.model.Dockerfile;
+import gr.aueb.balab.jadolint.model.From;
+import gr.aueb.balab.jadolint.model.Line;
 import java.util.List;
 
 /**
@@ -16,7 +19,6 @@ public class CopyRules implements Rule {
     private Copy copy;
     
     public boolean checkDL3010(){
-        //String findCd = "(\\s|^)cd\\s";
         
         List<String> src = copy.getSrc();
         
@@ -29,13 +31,34 @@ public class CopyRules implements Rule {
     }
     
     public boolean checkDL3021(){
-        //String findCd = "(\\s|^)cd\\s";
         
         List<String> src = copy.getSrc();
         
         if(src.size() >= 2){
             if(!copy.getDest().endsWith("/"))
                 return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean checkDL3022(Dockerfile doc){
+        
+        List<String> src = copy.getSrc();
+        
+        for(String s : src){
+            if(s.contains("--from")) {
+                String alias = s.split("=")[1];
+                for(Line line : doc.getLines()){
+                    if(line.getInstruction().equals("FROM")){
+                        From from = new From(line.getLine());
+                        if(from.getAlias().equals(alias)){
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
         }
         
         return true;
