@@ -82,7 +82,7 @@ public class CopyRules implements Rule {
                     }
                 }
 
-                if(line != null && new From(line.getLine()).getAlias().equals(alias))
+                if(line != null && new From(line.getLine()).getAlias() != null && new From(line.getLine()).getAlias().equals(alias))
                     return false;
             }
         }
