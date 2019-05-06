@@ -19,6 +19,10 @@ public class MaintainerRules implements Rule {
         return false;
     }
     
+    public void runAddRules(){
+        this.checkDL4000();
+    }
+    
     public MaintainerRules(Maintainer maintainer){
         this.maintainer = maintainer;
     }
