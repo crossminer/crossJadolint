@@ -13,13 +13,21 @@ import gr.aueb.balab.jadolint.model.Expose;
  */
 public class ExposeRules implements Rule {
     
-    public boolean checkDL3011(String line){
-        Expose expose = new Expose(line);
-        
+    private Expose expose;
+    
+    public boolean checkDL3011(){      
         if(expose.getPort() >= 0 && expose.getPort() <= 65535)
             return true;
         else
             return false;
+    }
+    
+    public void runExposeRules(){
+        this.checkDL3011();
+    }
+    
+    public ExposeRules(Expose expose){
+        this.expose = expose;
     }
     
 }
