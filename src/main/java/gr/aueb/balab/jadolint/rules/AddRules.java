@@ -28,6 +28,10 @@ public class AddRules implements Rule {
         return true;
     }
     
+    public void runAddRules(){
+        this.checkDL3020();
+    }
+    
     public AddRules(Add add){
         this.add = add;
     }
