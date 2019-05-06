@@ -53,6 +53,12 @@ public class FromRules implements Rule {
         return true;
     }
     
+    public void runAddRules(Dockerfile doc, int lineNumber){
+        this.checkDL3006();
+        this.checkDL3007();
+        this.checkDL3024(doc, lineNumber);
+    }
+    
     public FromRules(From from){
         this.from = from;
     }
