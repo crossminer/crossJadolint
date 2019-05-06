@@ -18,6 +18,28 @@ import java.util.regex.Pattern;
 public class RunRules implements Rule {
     
     private Run run;
+
+    public boolean checkDL3001() {
+        List<RunBlock> runBlocks = run.getRunBlocks();
+        for(RunBlock rb : runBlocks) {
+            switch(rb.getExecutable()) {
+
+            case "shutdown":
+            case "service":
+            case "ps":
+            case "free":
+            case "top":
+            case "kill":
+            case "mount":
+            case "ifconfig":
+            case "nano":
+            case "vim":
+                return false;
+            }
+        }
+
+        return true;
+    }
     
     public boolean checkDL3003(){
         //String findCd = "(\\s|^)cd\\s";
@@ -30,6 +52,33 @@ public class RunRules implements Rule {
         
         return true;
     }
+
+    public boolean checkDL3004() {
+        List<RunBlock> runBlocks = run.getRunBlocks();
+        for(RunBlock rb: runBlocks) {
+            if(rb.getExecutable().equals("sudo")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean checkDL3005() {
+        for(RunBlock rb: run.getRunBlocks()) {
+            if (rb.getExecutable().equals("apt-get")) {
+                String[] paramsArray = rb.getParams().split(" ");
+                for (String param: paramsArray) {
+                    if(param.equals("upgrade") || param.equals("dist-upgrade")) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     
     public boolean checkDL3008(){
         List<RunBlock> runBlocks = run.getAptGetInstallBlocks();
@@ -45,6 +94,19 @@ public class RunRules implements Rule {
         
         return true;
     }
+
+    public boolean checkDL3009() {
+        List<RunBlock> runBlocks = run.getRunBlocks();
+
+        for(RunBlock rb: runBlocks) {
+            String exec = rb.getExecutable();
+            String param = rb.getParams();
+            if(exec.equals("rm") && param.equals("-rf /var/lib/apt/lists/*")) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     public boolean checkDL3013(){
         List<RunBlock> runBlocks = run.getPipInstallBlocks();
@@ -58,6 +120,28 @@ public class RunRules implements Rule {
                 return false;
         }
         
+        return true;
+    }
+
+    public boolean checkDL3014() {
+        for(RunBlock rb : run.getAptGetInstallBlocks()) {
+            String params = rb.getParams();
+            if (!params.contains("install -y")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean checkDL3015() {
+        for (RunBlock rb : run.getAptGetInstallBlocks()) {
+            String[] paramsArray = rb.getParams().split(" ");
+            if (!paramsArray[paramsArray.length - 2].equals("--no-install-recommends")) {
+                return false;
+            }
+        }
+
         return true;
     }
     

@@ -18,6 +18,23 @@ import java.util.Set;
 public class FromRules implements Rule {
     private From from;
     
+    public boolean checkDL3006() {
+        if (from.getTag() == null) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkDL3007() {
+        if (from.getTag() != null) {
+            if(from.getTag().equals("latest")) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public boolean checkDL3024(Dockerfile doc, int lineNumber){
         
         if(from.getAlias() != null){
