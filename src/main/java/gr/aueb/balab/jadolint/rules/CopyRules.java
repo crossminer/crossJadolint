@@ -90,6 +90,13 @@ public class CopyRules implements Rule {
         return true;
     }
     
+    public void runCopyRules(Dockerfile doc, int lineNumber){
+        this.checkDL3010();
+        this.checkDL3021();
+        this.checkDL3022(doc);
+        this.checkDL3023(doc, lineNumber);
+    }
+    
     public CopyRules(Copy copy){
         this.copy = copy;
     }
