@@ -188,6 +188,21 @@ public class RunRules implements Rule {
         return true;
     }
     
+    public void runRunRules(){
+        this.checkDL3001();
+        this.checkDL3003();
+        this.checkDL3004();
+        this.checkDL3005();
+        this.checkDL3008();
+        this.checkDL3009();
+        this.checkDL3013();
+        this.checkDL3014();
+        this.checkDL3015();
+        this.checkDL3017();
+        this.checkDL3018();
+        this.checkDL3019();
+    }
+    
     public RunRules(Run run){
         this.run = run;
     }
