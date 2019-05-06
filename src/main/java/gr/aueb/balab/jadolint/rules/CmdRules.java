@@ -22,6 +22,10 @@ public class CmdRules implements Rule {
         return true;
     }
     
+    public void runCmdRules(){
+        this.checkDL3025();
+    }
+    
     public CmdRules(Cmd cmd){
         this.cmd = cmd;
     }
