@@ -13,16 +13,24 @@ import gr.aueb.balab.jadolint.model.Workdir;
  */
 public class WorkdirRules implements Rule {
     
-    public boolean checkDL3000(String line){
-        Workdir workdir = new Workdir(line);
-        
+    private Workdir workdir;
+    
+    public boolean checkDL3000(){
         if(!workdir.getPath().startsWith("/")){
-            if(line.startsWith("{"))
+            if(workdir.getPath().startsWith("{"))
                 return true;
             else
                 return false;
         } else
             return true;
+    }
+    
+    public void runWorkdirRules(){
+        this.checkDL3000();
+    }
+    
+    public WorkdirRules(Workdir workdir){
+        this.workdir = workdir;
     }
     
 }
