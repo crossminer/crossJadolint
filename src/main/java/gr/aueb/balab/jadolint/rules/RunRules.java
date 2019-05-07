@@ -7,6 +7,8 @@ package gr.aueb.balab.jadolint.rules;
 
 import gr.aueb.balab.jadolint.model.Run;
 import gr.aueb.balab.jadolint.model.RunBlock;
+import gr.aueb.jadolint.violations.Violation;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -188,19 +190,34 @@ public class RunRules implements Rule {
         return true;
     }
     
-    public void runRunRules(){
-        this.checkDL3001();
-        this.checkDL3003();
-        this.checkDL3004();
-        this.checkDL3005();
-        this.checkDL3008();
-        this.checkDL3009();
-        this.checkDL3013();
-        this.checkDL3014();
-        this.checkDL3015();
-        this.checkDL3017();
-        this.checkDL3018();
-        this.checkDL3019();
+    public List<Violation> runRunRules(){
+        List<Violation> violations = new ArrayList<>();
+        if(this.checkDL3001() == false)
+            violations.add(new Violation("DL3001", "For some bash commands it makes no sense running them in a Docker container like ssh, vim, shutdown, service, ps, free, top, kill, mount, ifconfig"));
+        if(this.checkDL3003() == false)
+            violations.add(new Violation("DL3003", "Use WORKDIR to switch to a directory"));
+        if(this.checkDL3004() == false)
+            violations.add(new Violation("DL3004", "Do not use sudo as it leads to unpredictable behavior. Use a tool like gosu to enforce root"));
+        if(this.checkDL3005() == false)
+            violations.add(new Violation("DL3005", "Do not use apt-get upgrade or dist-upgrade"));
+        if(this.checkDL3008() == false)
+            violations.add(new Violation("DL3008", "Pin versions in apt-get install"));
+        if(this.checkDL3009() == false)
+            violations.add(new Violation("DL3009", "Delete the apt-get lists after installing something"));
+        if(this.checkDL3013() == false)
+            violations.add(new Violation("DL3013", "Pin versions in pip"));
+        if(this.checkDL3014() == false)
+            violations.add(new Violation("DL3014", "Use the -y switch"));
+        if(this.checkDL3015() == false)
+            violations.add(new Violation("DL3015", "Avoid additional packages by specifying --no-install-recommends"));
+        if(this.checkDL3017() == false)
+            violations.add(new Violation("DL3017", "Do not use apk upgrade"));
+        if(this.checkDL3018() == false)
+            violations.add(new Violation("DL3018", "Pin versions in apk add. Instead of apk add <package> use apk add <package>=<version>"));
+        if(this.checkDL3019() == false)
+            violations.add(new Violation("DL3019", "Use the --no-cache switch to avoid the need to use --update and remove /var/cache/apk/* when done installing packages"));
+        
+        return violations;
     }
     
     public RunRules(Run run){

@@ -6,6 +6,9 @@
 package gr.aueb.balab.jadolint.rules;
 
 import gr.aueb.balab.jadolint.model.Workdir;
+import gr.aueb.jadolint.violations.Violation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,8 +28,12 @@ public class WorkdirRules implements Rule {
             return true;
     }
     
-    public void runWorkdirRules(){
-        this.checkDL3000();
+    public List<Violation> runWorkdirRules(){
+        List<Violation> violations = new ArrayList<>();
+        if(this.checkDL3000() == false)
+            violations.add(new Violation("DL3000", "Use absolute WORKDIR"));
+        
+        return violations;
     }
     
     public WorkdirRules(Workdir workdir){

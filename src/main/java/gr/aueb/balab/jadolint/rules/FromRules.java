@@ -8,7 +8,10 @@ package gr.aueb.balab.jadolint.rules;
 import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.From;
 import gr.aueb.balab.jadolint.model.Line;
+import gr.aueb.jadolint.violations.Violation;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,10 +56,16 @@ public class FromRules implements Rule {
         return true;
     }
     
-    public void runAddRules(Dockerfile doc, int lineNumber){
-        this.checkDL3006();
-        this.checkDL3007();
-        this.checkDL3024(doc, lineNumber);
+    public List<Violation> runAddRules(Dockerfile doc, int lineNumber){
+        List<Violation> violations = new ArrayList<>();
+        if(this.checkDL3006() == false)
+            violations.add(new Violation("DL3006" ,"Always tag the version of an image explicitly"));
+        if(this.checkDL3007() == false)
+            violations.add(new Violation("DL3007" ,"Using latest is prone to errors if the image will ever update. Pin the version explicitly to a release tag"));
+        if(this.checkDL3024(doc, lineNumber) == false)
+            violations.add(new Violation("DL3024" ,"FROM aliases (stage names) must be unique"));
+        
+        return violations;
     }
     
     public FromRules(From from){

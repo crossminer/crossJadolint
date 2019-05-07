@@ -9,6 +9,7 @@ import gr.aueb.balab.jadolint.model.Copy;
 import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.From;
 import gr.aueb.balab.jadolint.model.Line;
+import gr.aueb.jadolint.violations.Violation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,11 +91,18 @@ public class CopyRules implements Rule {
         return true;
     }
     
-    public void runCopyRules(Dockerfile doc, int lineNumber){
-        this.checkDL3010();
-        this.checkDL3021();
-        this.checkDL3022(doc);
-        this.checkDL3023(doc, lineNumber);
+    public List<Violation> runCopyRules(Dockerfile doc, int lineNumber){
+        List<Violation> violations = new ArrayList<>();
+        if(this.checkDL3010() == false)
+            violations.add(new Violation("DL3010", "Use ADD for extracting archives into an image"));
+        if(this.checkDL3021() == false)
+            violations.add(new Violation("DL3021", "COPY with more than 2 arguments requires the last argument to end with /"));
+        if(this.checkDL3022(doc) == false)
+            violations.add(new Violation("DL3022", "COPY --from should reference a previously defined FROM alias"));
+        if(this.checkDL3023(doc, lineNumber) == false)
+            violations.add(new Violation("DL3023", "COPY --from cannot reference its own FROM alias"));
+        
+        return violations;
     }
     
     public CopyRules(Copy copy){

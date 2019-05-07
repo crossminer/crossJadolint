@@ -6,6 +6,9 @@
 package gr.aueb.balab.jadolint.rules;
 
 import gr.aueb.balab.jadolint.model.Expose;
+import gr.aueb.jadolint.violations.Violation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,8 +25,12 @@ public class ExposeRules implements Rule {
             return false;
     }
     
-    public void runExposeRules(){
-        this.checkDL3011();
+    public List<Violation> runExposeRules(){
+        List<Violation> violations = new ArrayList<>();
+        if(this.checkDL3011() == false)
+            violations.add(new Violation("DL3011", "Valid UNIX ports range from 0 to 65535"));
+        
+        return violations;
     }
     
     public ExposeRules(Expose expose){
