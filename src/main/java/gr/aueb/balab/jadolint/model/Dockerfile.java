@@ -5,6 +5,7 @@
  */
 package gr.aueb.balab.jadolint.model;
 
+import gr.aueb.jadolint.violations.Violation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class Dockerfile {
         lines.add(line);
     }
     
-    public void addViolation(Line violation){
-        lines.add(violation);
+    public void addViolation(Violation violation){
+        violations.add(violation);
     }
 
     public List<Line> getLines() {
