@@ -56,7 +56,7 @@ public class FromRules implements Rule {
         return true;
     }
     
-    public List<Violation> runAddRules(Dockerfile doc, int lineNumber){
+    public List<Violation> runFromRules(Dockerfile doc, int lineNumber){
         List<Violation> violations = new ArrayList<>();
         if(this.checkDL3006() == false)
             violations.add(new Violation("DL3006" ,"Always tag the version of an image explicitly"));
