@@ -94,13 +94,13 @@ public class CopyRules implements Rule {
     public List<Violation> runCopyRules(Dockerfile doc, int lineNumber){
         List<Violation> violations = new ArrayList<>();
         if(this.checkDL3010() == false)
-            violations.add(new Violation("DL3010", "Use ADD for extracting archives into an image"));
+            violations.add(new Violation("DL3010", "Use ADD for extracting archives into an image", doc.getPath(), lineNumber));
         if(this.checkDL3021() == false)
-            violations.add(new Violation("DL3021", "COPY with more than 2 arguments requires the last argument to end with /"));
+            violations.add(new Violation("DL3021", "COPY with more than 2 arguments requires the last argument to end with /", doc.getPath(), lineNumber));
         if(this.checkDL3022(doc) == false)
-            violations.add(new Violation("DL3022", "COPY --from should reference a previously defined FROM alias"));
+            violations.add(new Violation("DL3022", "COPY --from should reference a previously defined FROM alias", doc.getPath(), lineNumber));
         if(this.checkDL3023(doc, lineNumber) == false)
-            violations.add(new Violation("DL3023", "COPY --from cannot reference its own FROM alias"));
+            violations.add(new Violation("DL3023", "COPY --from cannot reference its own FROM alias", doc.getPath(), lineNumber));
         
         return violations;
     }

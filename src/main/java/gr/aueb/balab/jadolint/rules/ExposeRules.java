@@ -5,6 +5,7 @@
  */
 package gr.aueb.balab.jadolint.rules;
 
+import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.Expose;
 import gr.aueb.jadolint.violations.Violation;
 import java.util.ArrayList;
@@ -25,10 +26,10 @@ public class ExposeRules implements Rule {
             return false;
     }
     
-    public List<Violation> runExposeRules(){
+    public List<Violation> runExposeRules(Dockerfile doc, int lineNumber){
         List<Violation> violations = new ArrayList<>();
         if(this.checkDL3011() == false)
-            violations.add(new Violation("DL3011", "Valid UNIX ports range from 0 to 65535"));
+            violations.add(new Violation("DL3011", "Valid UNIX ports range from 0 to 65535", doc.getPath(), lineNumber));
         
         return violations;
     }

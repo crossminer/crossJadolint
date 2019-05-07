@@ -6,6 +6,7 @@
 package gr.aueb.balab.jadolint.rules;
 
 import gr.aueb.balab.jadolint.model.Add;
+import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.jadolint.violations.Violation;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,10 @@ public class AddRules implements Rule {
         return true;
     }
     
-    public List<Violation> runAddRules(){
+    public List<Violation> runAddRules(Dockerfile doc, int lineNumber){
         List<Violation> violations = new ArrayList<>();
         if(this.checkDL3020() == false)
-            violations.add(new Violation("DL3020", "Use COPY instead of ADD for files and folders"));
+            violations.add(new Violation("DL3020", "Use COPY instead of ADD for files and folders", doc.getPath(), lineNumber));
         
         return violations;
     }

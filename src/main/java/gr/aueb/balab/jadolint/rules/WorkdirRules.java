@@ -5,6 +5,7 @@
  */
 package gr.aueb.balab.jadolint.rules;
 
+import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.Workdir;
 import gr.aueb.jadolint.violations.Violation;
 import java.util.ArrayList;
@@ -28,10 +29,10 @@ public class WorkdirRules implements Rule {
             return true;
     }
     
-    public List<Violation> runWorkdirRules(){
+    public List<Violation> runWorkdirRules(Dockerfile doc, int lineNumber){
         List<Violation> violations = new ArrayList<>();
         if(this.checkDL3000() == false)
-            violations.add(new Violation("DL3000", "Use absolute WORKDIR"));
+            violations.add(new Violation("DL3000", "Use absolute WORKDIR", doc.getPath(), lineNumber));
         
         return violations;
     }

@@ -6,6 +6,7 @@
 package gr.aueb.balab.jadolint.rules;
 
 import gr.aueb.balab.jadolint.model.Cmd;
+import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.jadolint.violations.Violation;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,10 @@ public class CmdRules implements Rule {
         return true;
     }
     
-    public List<Violation> runCmdRules(){
+    public List<Violation> runCmdRules(Dockerfile doc, int lineNumber){
         List<Violation> violations = new ArrayList<>();
         if(this.checkDL3025() == false)
-            violations.add(new Violation("DL3025", "Use arguments JSON notation for CMD and ENTRYPOINT arguments"));
+            violations.add(new Violation("DL3025", "Use arguments JSON notation for CMD and ENTRYPOINT arguments", doc.getPath(), lineNumber));
         
         return violations;
     }

@@ -13,12 +13,14 @@ public class Violation {
     
     private String code;
     private String message;
-    private String lineNumber;
     private String fileName;
+    private int lineNumber;
     
-    public Violation(String code, String message, String fileName, String lineNumber){
+    public Violation(String code, String message, String fileName, int lineNumber){
         this.code = code;
         this.message = message;
+        this.fileName = fileName;
+        this.lineNumber = lineNumber;
     }
 
     public String getCode() {
@@ -37,7 +39,7 @@ public class Violation {
         this.message = message;
     }
 
-    public String getLineNumber() {
+    public int getLineNumber() {
         return lineNumber;
     }
 
@@ -45,7 +47,7 @@ public class Violation {
         return fileName;
     }
 
-    public void setLineNumber(String lineNumber) {
+    public void setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
     }
 
