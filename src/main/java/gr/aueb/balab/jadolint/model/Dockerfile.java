@@ -15,14 +15,15 @@ import java.util.List;
  */
 public class Dockerfile {
     
+    private String path;
     private List<Line> lines = new ArrayList<>();
-    private List<Violation> violations;
+    private List<Violation> violations = new ArrayList<>();
     
     public void addLine(Line line){
         lines.add(line);
     }
     
-    public void addViolation(List<Violation> violations){
+    public void addViolations(List<Violation> violations){
         this.violations.addAll(violations);
     }
 
