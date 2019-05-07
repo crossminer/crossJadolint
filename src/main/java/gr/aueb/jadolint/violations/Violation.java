@@ -13,6 +13,8 @@ public class Violation {
     
     private String code;
     private String message;
+    private String lineNumber;
+    private String fileName;
     
     public Violation(String code, String message){
         this.code = code;
@@ -33,6 +35,22 @@ public class Violation {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getLineNumber() {
+        return lineNumber;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setLineNumber(String lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
     
 }
