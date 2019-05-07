@@ -7,7 +7,7 @@ package gr.aueb.balab.jadolint.rules;
 
 import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.Workdir;
-import gr.aueb.jadolint.violations.Violation;
+import gr.aueb.balab.jadolint.violations.Violation;
 import java.util.ArrayList;
 import java.util.List;
 

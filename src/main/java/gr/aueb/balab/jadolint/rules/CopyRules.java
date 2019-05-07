@@ -9,7 +9,7 @@ import gr.aueb.balab.jadolint.model.Copy;
 import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.From;
 import gr.aueb.balab.jadolint.model.Line;
-import gr.aueb.jadolint.violations.Violation;
+import gr.aueb.balab.jadolint.violations.Violation;
 import java.util.ArrayList;
 import java.util.List;
 

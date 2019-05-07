@@ -23,7 +23,7 @@ import gr.aueb.balab.jadolint.rules.FromRules;
 import gr.aueb.balab.jadolint.rules.MaintainerRules;
 import gr.aueb.balab.jadolint.rules.RunRules;
 import gr.aueb.balab.jadolint.rules.WorkdirRules;
-import gr.aueb.jadolint.violations.Violation;
+import gr.aueb.balab.jadolint.violations.Violation;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
