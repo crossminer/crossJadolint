@@ -22,7 +22,7 @@ public class MaintainerRules implements Rule {
         return false;
     }
     
-    public List<Violation> runAddRules(){
+    public List<Violation> runMaintainerRules(){
         List<Violation> violations = new ArrayList<>();
         if(this.checkDL4000() == false)
             violations.add(new Violation("DL4000", "MAINTAINER is deprecated"));
