@@ -16,7 +16,7 @@ public class Violation {
     private String lineNumber;
     private String fileName;
     
-    public Violation(String code, String message){
+    public Violation(String code, String message, String fileName, String lineNumber){
         this.code = code;
         this.message = message;
     }
