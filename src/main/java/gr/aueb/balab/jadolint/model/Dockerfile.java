@@ -22,8 +22,8 @@ public class Dockerfile {
         lines.add(line);
     }
     
-    public void addViolation(Violation violation){
-        violations.add(violation);
+    public void addViolation(List<Violation> violations){
+        this.violations.addAll(violations);
     }
 
     public List<Line> getLines() {
