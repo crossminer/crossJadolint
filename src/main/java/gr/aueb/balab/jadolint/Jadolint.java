@@ -5,6 +5,8 @@
  */
 package gr.aueb.balab.jadolint;
 
+import gr.aueb.balab.jadolint.dependencies.Dependency;
+import gr.aueb.balab.jadolint.dependencies.DependencyDetector;
 import gr.aueb.balab.jadolint.model.Add;
 import gr.aueb.balab.jadolint.model.Cmd;
 import gr.aueb.balab.jadolint.model.Copy;
@@ -95,8 +97,18 @@ public class Jadolint {
                     doc.addViolations(violations);
             }
             
+            getDependencies2(path, doc);
+            
             for(Violation v : doc.getViolations())
                 System.out.println(v.getFileName() + " " + v.getLineNumber() + " " + v.getCode() + " " + v.getMessage());
+            
+            for(Dependency d : doc.getDependencies()){
+                System.out.print(d.getPackageName());
+                if(d.getPackageVersion() != null)
+                    System.out.println(" " + d.getPackageVersion());
+                else
+                    System.out.println();
+            }
         } catch (IOException ex) {
             Logger.getLogger(Jadolint.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,6 +171,39 @@ public class Jadolint {
         } catch (IOException ex) {
             Logger.getLogger(Jadolint.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+    
+    private void getDependencies(String path) {
+        try {
+            LineMerger l = new LineMerger();
+            doc = new Dockerfile();
+            
+            doc.setPath(path);
+            
+            l.mergeLines(doc, new File(path));
+            
+            DependencyDetector detector = new DependencyDetector();
+            
+            for(Line line : doc.getLines()){
+                detector.detectDependency(line.getLine());
+            }
+            
+            doc.addDependencies(detector.getDependencies());
+        } catch (IOException ex) {
+            Logger.getLogger(Jadolint.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private static void getDependencies2(String path, Dockerfile doc) {
+
+        DependencyDetector detector = new DependencyDetector();
+
+        for(Line line : doc.getLines()){
+            detector.detectDependency(line.getLine());
+        }
+
+        doc.addDependencies(detector.getDependencies());
         
     }
 
