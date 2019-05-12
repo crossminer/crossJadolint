@@ -174,7 +174,7 @@ public class Jadolint {
         
     }
     
-    private void getDependencies(String path) {
+    public void getDependencies(String path) {
         try {
             LineMerger l = new LineMerger();
             doc = new Dockerfile();
