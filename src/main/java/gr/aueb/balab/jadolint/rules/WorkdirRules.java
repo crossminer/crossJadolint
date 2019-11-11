@@ -5,7 +5,11 @@
  */
 package gr.aueb.balab.jadolint.rules;
 
+import gr.aueb.balab.jadolint.model.Dockerfile;
 import gr.aueb.balab.jadolint.model.Workdir;
+import gr.aueb.balab.jadolint.violations.Violation;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,16 +17,28 @@ import gr.aueb.balab.jadolint.model.Workdir;
  */
 public class WorkdirRules implements Rule {
     
-    public boolean checkDL3000(String line){
-        Workdir workdir = new Workdir(line);
-        
+    private Workdir workdir;
+    
+    public boolean checkDL3000(){
         if(!workdir.getPath().startsWith("/")){
-            if(line.startsWith("{"))
+            if(workdir.getPath().startsWith("{"))
                 return true;
             else
                 return false;
         } else
             return true;
+    }
+    
+    public List<Violation> runWorkdirRules(Dockerfile doc, int lineNumber){
+        List<Violation> violations = new ArrayList<>();
+        if(this.checkDL3000() == false)
+            violations.add(new Violation("DL3000", "Use absolute WORKDIR", doc.getPath(), lineNumber));
+        
+        return violations;
+    }
+    
+    public WorkdirRules(Workdir workdir){
+        this.workdir = workdir;
     }
     
 }
