@@ -44,6 +44,11 @@ public class DependencyDetector {
             //String packageInfo = splitLine[splitLine.length - 1];
             
             for(String s : splitLine) {
+                
+                if(s.contains("$")){
+                    
+                }
+                
             	if(!s.equals("install") && !s.startsWith("-")) {
 		            if (s.contains("=")) {
 		                String name = s.split("=", 2)[0];
