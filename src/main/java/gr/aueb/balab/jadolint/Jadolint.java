@@ -57,7 +57,7 @@ public class Jadolint {
             
             l.mergeLines(doc, new File(path));
             
-            List<Violation> violations = new ArrayList<>();
+            /*List<Violation> violations = new ArrayList<>();
             
             for(Line line : doc.getLines()){
                 //System.out.println(line.getLine() + " " + line.getLineNumber() + " " + line.getInstruction());
@@ -95,7 +95,7 @@ public class Jadolint {
                 }
                 if(!violations.isEmpty())
                     doc.addViolations(violations);
-            }
+            }*/
             
             getDependencies2(path, doc);
             
