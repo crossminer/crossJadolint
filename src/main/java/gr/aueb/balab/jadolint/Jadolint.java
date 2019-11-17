@@ -99,11 +99,11 @@ public class Jadolint {
             
             getDependencies2(path, doc);
             
-            for(Violation v : doc.getViolations())
-                System.out.println(v.getFileName() + " " + v.getLineNumber() + " " + v.getCode() + " " + v.getMessage());
+            //for(Violation v : doc.getViolations())
+            //    System.out.println(v.getFileName() + " " + v.getLineNumber() + " " + v.getCode() + " " + v.getMessage());
             
             for(Dependency d : doc.getDependencies()){
-                System.out.print(d.getPackageName());
+                System.out.print(d.getPackageName().trim());
                 if(d.getPackageVersion() != null)
                     System.out.println(" " + d.getPackageVersion());
                 else
