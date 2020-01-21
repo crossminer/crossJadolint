@@ -102,8 +102,10 @@ public class Jadolint {
             for(Violation v : doc.getViolations())
                 System.out.println(v.getFileName() + " " + v.getLineNumber() + " " + v.getCode() + " " + v.getMessage());
             
+            System.out.println("-----");
+            
             for(Dependency d : doc.getDependencies()){
-                System.out.print(d.getPackageName());
+                System.out.print(d.getPackageName().trim());
                 if(d.getPackageVersion() != null)
                     System.out.println(" " + d.getPackageVersion());
                 else
