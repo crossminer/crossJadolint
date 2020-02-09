@@ -62,7 +62,9 @@ public class Cmd implements Instruction{
             String[] splitLine = lineWithoutInstruction.split(" ");
 
             executable = splitLine[0].trim();
-            params = splitLine[1].trim();
+            
+            if(splitLine.length > 1)
+            	params = splitLine[1].trim();
             
             execForm = false;
         }
