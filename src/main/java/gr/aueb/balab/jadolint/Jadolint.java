@@ -48,7 +48,19 @@ public class Jadolint {
                 return;
             }
             
+            boolean depsFlag = false;
+            
+            boolean smellsFlag = false;
+            
             String path = args[0];
+            
+            if(args.length > 1){
+                if(args[1].equals("--deps"))
+                    depsFlag = true;
+                
+                if(args[1].equals("--smells"))
+                    smellsFlag = true;
+            }
             
             LineMerger l = new LineMerger();
             Dockerfile doc = new Dockerfile();
@@ -99,17 +111,22 @@ public class Jadolint {
             
             getDependencies2(path, doc);
             
-            for(Violation v : doc.getViolations())
-                System.out.println(v.getFileName() + " " + v.getLineNumber() + " " + v.getCode() + " " + v.getMessage());
+            if(args.length == 1 || smellsFlag == true){
+                for(Violation v : doc.getViolations())
+                    System.out.println(v.getFileName() + " " + v.getLineNumber() + " " + v.getCode() + " " + v.getMessage());
+            }
             
-            System.out.println("-----");
+            if(args.length == 1)
+                System.out.println("-----");
             
-            for(Dependency d : doc.getDependencies()){
-                System.out.print(d.getPackageName().trim());
-                if(d.getPackageVersion() != null)
-                    System.out.println(" " + d.getPackageVersion());
-                else
-                    System.out.println();
+            if(args.length == 1 || depsFlag == true){
+                for(Dependency d : doc.getDependencies()){
+                    System.out.print(d.getPackageName().trim());
+                    if(d.getPackageVersion() != null)
+                        System.out.println(" " + d.getPackageVersion());
+                    else
+                        System.out.println();
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(Jadolint.class.getName()).log(Level.SEVERE, null, ex);
