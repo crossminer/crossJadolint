@@ -1,3 +1,5 @@
 # jadolint
 
-This is a Dockerfiles linter tool, implemented in Java.
+The tool is implemented in the EU funded research project CROSSMINER https://www.crossminer.org/.
+
+This is a Dockerfile linter tool, implemented in Java and essentialy is a port of Hadolint (Haskell Dockerfile Linter) https://github.com/hadolint/hadolint
